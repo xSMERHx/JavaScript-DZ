@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        .task {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="task">
+        <h2>Завдання 1</h2>
+        <p id="task1"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 2</h2>
+        <p id="task2"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 3</h2>
+        <p id="task3"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 4</h2>
+        <p id="task4"></p>
+    </div>
+
+    <script>
+
+        // =========================
+        // Завдання 1
+        // =========================
+
+        let user = {};
+
+        user.name = "Марк";
+        user.surname = "Сміт";
+
+        user.name = "Тарас";
+
+        delete user.name;
+
+        document.getElementById("task1").innerHTML =
+            "Об'єкт user: " + JSON.stringify(user);
+
+
+        // =========================
+        // Завдання 2
+        // =========================
+
+        function isEmpty(obj) {
+            for (let key in obj) {
+                return false;
+            }
+            return true;
+        }
+
+        let schedule = {};
+
+        let result1 = isEmpty(schedule);
+
+        schedule["8:30"] = "get up";
+
+        let result2 = isEmpty(schedule);
+
+        document.getElementById("task2").innerHTML =
+            "Порожній об'єкт: " + result1 +
+            "<br>Не порожній об'єкт: " + result2;
+
+
+        // =========================
+        // Завдання 3
+        // =========================
+
+        let salaries = {
+            Jarik: 1000,
+            Anna: 1600,
+            Miko: 1300
+        };
+
+        let sum = 0;
+
+        for (let key in salaries) {
+            sum += salaries[key];
+        }
+
+        document.getElementById("task3").innerHTML =
+            "Сума зарплат: " + sum;
+
+
+        // =========================
+        // Завдання 4
+        // =========================
+
+        function multiplyNumeric(obj) {
+            for (let key in obj) {
+                if (typeof obj[key] === "number") {
+                    obj[key] *= 2;
+                }
+            }
+        }
+
+        let menu = {
+            width: 200,
+            height: 300,
+            title: "My menu"
+        };
+
+        multiplyNumeric(menu);
+
+        document.getElementById("task4").innerHTML =
+            "Новий об'єкт: " + JSON.stringify(menu);
+
+    </script>
+
+</body>
+</html>

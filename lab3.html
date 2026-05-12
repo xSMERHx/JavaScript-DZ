@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .task {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="task">
+        <h2>Завдання 1</h2>
+        <p id="task1"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 2</h2>
+        <p id="task2"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 3</h2>
+        <p id="task3"></p>
+    </div>
+
+    <script>
+
+        // =========================
+        // Завдання 1
+        // =========================
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        let randomNumber = random(1, 10);
+
+        document.getElementById("task1").innerHTML =
+            "Випадкове число від 1 до 10: " + randomNumber;
+
+
+        // =========================
+        // Завдання 2
+        // =========================
+
+        function isPrime(num) {
+
+            if (num <= 1) {
+                return false;
+            }
+
+            for (let i = 2; i < num; i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        let number = 7;
+
+        document.getElementById("task2").innerHTML =
+            "Число " + number + " просте: " + isPrime(number);
+
+
+        // =========================
+        // Завдання 3
+        // =========================
+
+        function sumToN(n) {
+
+            let sum = 0;
+
+            if (n > 0) {
+
+                for (let i = 1; i <= n; i++) {
+                    sum += i;
+                }
+
+            } else {
+
+                for (let i = 1; i >= n; i--) {
+                    sum += i;
+                }
+
+            }
+
+            return sum;
+        }
+
+        let n = 5;
+
+        document.getElementById("task3").innerHTML =
+            "Сума чисел від 1 до " + n + ": " + sumToN(n);
+
+    </script>
+
+</body>
+</html>

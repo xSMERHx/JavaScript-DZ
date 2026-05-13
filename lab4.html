@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перевірка рядків</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+
+        .task {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        input {
+            width: 300px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================= -->
+    <!-- Завдання 1 -->
+    <!-- ========================= -->
+
+    <div class="task">
+        <h2>Завдання 1 — Перший символ у верхній регістр</h2>
+
+        <input type="text" id="input1" placeholder="Введіть текст">
+
+        <br>
+
+        <button onclick="checkTask1()">Перевірити</button>
+
+        <div class="result" id="result1"></div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Завдання 2 -->
+    <!-- ========================= -->
+
+    <div class="task">
+        <h2>Завдання 2 — Перевірка на спам</h2>
+
+        <input type="text" id="input2" placeholder="Введіть текст">
+
+        <br>
+
+        <button onclick="checkTask2()">Перевірити</button>
+
+        <div class="result" id="result2"></div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Завдання 3 -->
+    <!-- ========================= -->
+
+    <div class="task">
+        <h2>Завдання 3 — Урізання тексту</h2>
+
+        <input type="text" id="input3" placeholder="Введіть довгий текст">
+
+        <br><br>
+
+        <input type="number" id="maxlength" placeholder="Максимальна довжина">
+
+        <br>
+
+        <button onclick="checkTask3()">Перевірити</button>
+
+        <div class="result" id="result3"></div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Завдання 4 -->
+    <!-- ========================= -->
+
+    <div class="task">
+        <h2>Завдання 4 — Перевід на інший рядок</h2>
+
+        <input type="text" id="input4" placeholder="Введіть текст">
+
+        <br>
+
+        <button onclick="checkTask4()">Перевірити</button>
+
+        <div class="result" id="result4"></div>
+    </div>
+
+
+    <script>
+
+        // =========================
+        // Завдання 1
+        // =========================
+
+        function ucFirst(str) {
+
+            if (!str) {
+                return "";
+            }
+
+            return str[0].toUpperCase() + str.slice(1);
+        }
+
+        function checkTask1() {
+
+            let text = document.getElementById("input1").value;
+            let result = document.getElementById("result1");
+
+            if (text === "") {
+
+                result.innerHTML = "Помилка: введіть текст!";
+                result.className = "result error";
+
+                return;
+            }
+
+            result.innerHTML = "Результат: " + ucFirst(text);
+            result.className = "result success";
+        }
+
+
+        // =========================
+        // Завдання 2
+        // =========================
+
+        function checkSpam(str) {
+
+            let lowerStr = str.toLowerCase();
+
+            return lowerStr.includes("росі") || lowerStr.includes("xxx");
+        }
+
+        function checkTask2() {
+
+            let text = document.getElementById("input2").value;
+            let result = document.getElementById("result2");
+
+            if (text === "") {
+
+                result.innerHTML = "Помилка: введіть текст!";
+                result.className = "result error";
+
+                return;
+            }
+
+            if (checkSpam(text)) {
+
+                result.innerHTML = "Помилка: текст містить спам!";
+                result.className = "result error";
+
+            } else {
+
+                result.innerHTML = "Текст не містить спам.";
+                result.className = "result success";
+            }
+        }
+
+
+        // =========================
+        // Завдання 3
+        // =========================
+
+        function truncate(str, maxlength) {
+
+            if (str.length > maxlength) {
+                return str.slice(0, maxlength - 1) + "…";
+            }
+
+            return str;
+        }
+
+        function checkTask3() {
+
+            let text = document.getElementById("input3").value;
+            let maxlength = document.getElementById("maxlength").value;
+            let result = document.getElementById("result3");
+
+            if (text === "" || maxlength === "") {
+
+                result.innerHTML = "Помилка: заповніть усі поля!";
+                result.className = "result error";
+
+                return;
+            }
+
+            result.innerHTML =
+                "Результат: " + truncate(text, Number(maxlength));
+
+            result.className = "result success";
+        }
+
+
+        // =========================
+        // Завдання 4
+        // =========================
+
+        function strikeStr(str) {
+
+            let words = str.split(" ");
+            let result = "";
+
+            for (let i = 0; i < words.length; i++) {
+
+                result += words[i] + " ";
+
+                if ((i + 1) % 3 === 0) {
+                    result += "<br>";
+                }
+            }
+
+            return result;
+        }
+
+        function checkTask4() {
+
+            let text = document.getElementById("input4").value;
+            let result = document.getElementById("result4");
+
+            if (text === "") {
+
+                result.innerHTML = "Помилка: введіть текст!";
+                result.className = "result error";
+
+                return;
+            }
+
+            result.innerHTML = strikeStr(text);
+            result.className = "result success";
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Масиви JavaScript</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+
+        .task {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            margin-top: 10px;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================= -->
+    <!-- Завдання 1 -->
+    <!-- ========================= -->
+
+    <div class="task">
+        <h2>Завдання 1 — Операції з масивами</h2>
+
+        <button onclick="task1()">Запустити</button>
+
+        <div class="result" id="result1"></div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Завдання 2 -->
+    <!-- ========================= -->
+
+    <div class="task">
+        <h2>Завдання 2 — Сума введених чисел</h2>
+
+        <button onclick="sumInput()">Ввести числа</button>
+
+        <div class="result" id="result2"></div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Завдання 3 -->
+    <!-- ========================= -->
+
+    <div class="task">
+        <h2>Завдання 3 — Максимальний підмасив</h2>
+
+        <input type="text" id="arrayInput"
+               placeholder="Наприклад: 1, -2, 3, 4, -9, 6">
+
+        <br>
+
+        <button onclick="task3()">Обчислити</button>
+
+        <div class="result" id="result3"></div>
+    </div>
+
+
+    <script>
+
+        // =========================
+        // Завдання 1
+        // =========================
+
+        function task1() {
+
+            let output = "";
+
+            // 1
+            let styles = ["Jazz", "Blues"];
+            output += "Початковий масив: " + styles + "<br><br>";
+
+            // 2
+            styles.push("Rock-n-Roll");
+            output += "Після додавання Rock-n-Roll: "
+                + styles + "<br><br>";
+
+            // 3
+            let middle = Math.floor(styles.length / 2);
+            styles[middle] = "Classics";
+
+            output += "Після заміни середнього елемента: "
+                + styles + "<br><br>";
+
+            // 4
+            let deleted = styles.shift();
+
+            output += "Видалений елемент: "
+                + deleted + "<br><br>";
+
+            output += "Масив після видалення: "
+                + styles + "<br><br>";
+
+            // 5
+            styles.unshift("Rap", "Reggae");
+
+            output += "Після додавання Rap і Reggae: "
+                + styles;
+
+            document.getElementById("result1").innerHTML = output;
+        }
+
+
+        // =========================
+        // Завдання 2
+        // =========================
+
+        function sumInput() {
+
+            let numbers = [];
+
+            while (true) {
+
+                let value = prompt("Введіть число");
+
+                if (
+                    value === "" ||
+                    value === null ||
+                    !isFinite(value)
+                ) {
+                    break;
+                }
+
+                numbers.push(+value);
+            }
+
+            let sum = 0;
+
+            for (let number of numbers) {
+                sum += number;
+            }
+
+            document.getElementById("result2").innerHTML =
+                "Сума чисел: " + sum;
+        }
+
+
+        // =========================
+        // Завдання 3
+        // =========================
+
+        function getMaxSubSum(arr) {
+
+            let maxSum = 0;
+            let partialSum = 0;
+
+            for (let item of arr) {
+
+                partialSum += item;
+
+                if (partialSum > maxSum) {
+                    maxSum = partialSum;
+                }
+
+                if (partialSum < 0) {
+                    partialSum = 0;
+                }
+            }
+
+            return maxSum;
+        }
+
+        function task3() {
+
+            let input =
+                document.getElementById("arrayInput").value;
+
+            let result =
+                document.getElementById("result3");
+
+            if (input === "") {
+
+                result.innerHTML =
+                    "Помилка: введіть числа!";
+                result.className = "result error";
+
+                return;
+            }
+
+            let arr = input.split(",").map(Number);
+
+            for (let item of arr) {
+
+                if (isNaN(item)) {
+
+                    result.innerHTML =
+                        "Помилка: введіть тільки числа!";
+                    result.className = "result error";
+
+                    return;
+                }
+            }
+
+            let maxSum = getMaxSubSum(arr);
+
+            result.innerHTML =
+                "Максимальна сума підмасиву: " + maxSum;
+
+            result.className = "result success";
+        }
+
+    </script>
+
+</body>
+</html>

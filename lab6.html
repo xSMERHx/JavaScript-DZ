@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Робота з масивами</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .task {
+            border: 1px solid black;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Завдання</h1>
+
+    <div class="task">
+        <h2>Завдання 1</h2>
+        <p id="task1"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 2</h2>
+        <p id="task2"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 3</h2>
+        <p id="task3"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 4</h2>
+        <p id="task4"></p>
+    </div>
+
+    <script>
+
+        // Завдання 1
+        function unique(arr) {
+            return [...new Set(arr)];
+        }
+
+        let arr = ["кришна", "кришна", "харе", "харе", "харе", "кришна", ":-O"];
+
+        document.getElementById("task1").innerHTML =
+            "Унікальні елементи: " + unique(arr).join(", ");
+
+
+
+        // Завдання 2
+        function aclean(arr) {
+            let map = new Map();
+
+            for (let word of arr) {
+                let sorted = word.toLowerCase().split("").sort().join("");
+                map.set(sorted, word);
+            }
+
+            return Array.from(map.values());
+        }
+
+        let words = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+        document.getElementById("task2").innerHTML =
+            "Без анаграм: " + aclean(words).join(", ");
+
+
+
+        // Завдання 3
+        function countElements(arr) {
+            let map = new Map();
+
+            for (let num of arr) {
+                if (map.has(num)) {
+                    map.set(num, map.get(num) + 1);
+                } else {
+                    map.set(num, 1);
+                }
+            }
+
+            return map;
+        }
+
+        let numbers = [1, 2, 2, 3, 1, 4, 2];
+
+        let result = countElements(numbers);
+
+        let text = "";
+
+        for (let [key, value] of result) {
+            text += key + " = " + value + "<br>";
+        }
+
+        document.getElementById("task3").innerHTML = text;
+
+
+
+        // Завдання 4
+        function isUnique(arr) {
+            return new Set(arr).size === arr.length;
+        }
+
+        let array1 = [1, 2, 3, 4];
+        let array2 = [1, 2, 2, 4];
+
+        document.getElementById("task4").innerHTML =
+            "[1,2,3,4] → " + isUnique(array1) +
+            "<br>[1,2,2,4] → " + isUnique(array2);
+
+    </script>
+
+</body>
+</html>

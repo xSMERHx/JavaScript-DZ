@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Об'єкти JavaScript</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .task {
+            border: 1px solid black;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Завдання</h1>
+
+    <div class="task">
+        <h2>Завдання 1</h2>
+        <p id="task1"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 2</h2>
+        <p id="task2"></p>
+    </div>
+
+    <div class="task">
+        <h2>Завдання 3</h2>
+        <p id="task3"></p>
+    </div>
+
+    <script>
+
+        // Завдання 1
+        // Підсумуйте властивості
+
+        function sumSalaries(salaries) {
+
+            let sum = 0;
+
+            for (let salary of Object.values(salaries)) {
+                sum += salary;
+            }
+
+            return sum;
+        }
+
+        let salaries = {
+            Іван: 1000,
+            Петро: 1500,
+            Марія: 2000
+        };
+
+        document.getElementById("task1").innerHTML =
+            "Сума зарплат: " + sumSalaries(salaries);
+
+
+
+        // Завдання 2
+        // Порахуйте властивості
+
+        function count(obj) {
+            return Object.keys(obj).length;
+        }
+
+        let user = {
+            name: "Іван",
+            age: 25,
+            city: "Київ"
+        };
+
+        document.getElementById("task2").innerHTML =
+            "Кількість властивостей: " + count(user);
+
+
+
+        // Завдання 3
+        // Деструктуроване присвоєння
+
+        let person = {
+            name: "John",
+            years: 30
+        };
+
+        let {
+            name,
+            years: age,
+            isAdmin = false
+        } = person;
+
+        document.getElementById("task3").innerHTML =
+            "name: " + name +
+            "<br>age: " + age +
+            "<br>isAdmin: " + isAdmin;
+
+    </script>
+
+</body>
+</html>
